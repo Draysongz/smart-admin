@@ -5,6 +5,8 @@ import { signOut } from 'firebase/auth'
 import './Dashboard.css'
 import avatar from '../Assets/avatar.svg'
 
+
+
 const Dashboard = () => {
   
     const navigate = useNavigate()
@@ -22,9 +24,10 @@ const Dashboard = () => {
    document.title='Dashboard'
   return (
     <>
+    <input type='checkbox' id='nav-toggle'/>
     <div className="sidebar">
       <div className="sidebar-brand">
-        <h2><span className='lab la-accusoft'>Accusoft</span></h2>
+        <h2><span className="las la-lightbulb"></span> <span>Smart Change</span></h2>
       </div>
       <div className="sidebar-menu">
         <ul>
@@ -37,39 +40,34 @@ const Dashboard = () => {
             <li>
             <a href="#">
               <span className='las la-user'></span>
-              <span>Customers</span>
+              <span>Users</span>
             </a>
             </li>
             <li>
             <a href="#">
               <span className='las la-clipboard-list'></span>
-              <span>Projects</span>
+              <span>Merchants</span>
             </a>
             </li>
             <li>
             <a href="#">
               <span className='las la-shopping-bag'></span>
-              <span>Orders</span>
-            </a>
-            </li>
-            <li>
-            <a href="#">
-              <span className='las la-receipt'></span>
-              <span>Inventory</span>
+              <span>Transactions</span>
             </a>
             </li>
             <li>
             <a href="#">
               <span className='las la-user-circle'></span>
-              <span>Accounts</span>
+              <span>Account</span>
             </a>
             </li>
             <li>
-            <a href="#">
-              <span className='las la-clipboard-list'></span>
-              <span>Tasks</span>
-            </a>
+              <a href="#">
+              <span className="las la-power-off"></span>
+              <span onClick={logout} className='logbtn'>Log out</span>
+              </a>
             </li>
+            
         </ul>
       </div>
     </div>
@@ -78,7 +76,7 @@ const Dashboard = () => {
   <header>
     <div className="header-title">
       <h2>
-      <label htmlFor="">
+      <label htmlFor="nav-toggle">
         <span className='las la-bars'></span>
       </label>
          Dashboard
@@ -103,7 +101,7 @@ const Dashboard = () => {
       <div className="card-single">
         <div>
           <h1>54</h1>
-          <span>Customers</span>
+          <span>Users</span>
         </div>
         <div>
           <span className="las la-users"></span>
@@ -113,7 +111,7 @@ const Dashboard = () => {
       <div className="card-single">
         <div>
           <h1>79</h1>
-          <span>Projects</span>
+          <span>Merchants</span>
         </div>
         <div>
           <span className="las la-clipboard-list"></span>
@@ -123,7 +121,7 @@ const Dashboard = () => {
       <div className="card-single">
         <div>
           <h1>124</h1>
-          <span>Orders</span>
+          <span>Transactions</span>
         </div>
         <div>
           <span className="las la-shopping-bag"></span>
@@ -144,7 +142,7 @@ const Dashboard = () => {
         <div className="projects">
           <div className="card">
             <div className="card-header">
-              <h3>Recent Projects</h3>
+              <h3>Recent Signups</h3>
 
               <button>See all <span className="las la-arrow-right"></span></button>
             </div>
@@ -153,79 +151,79 @@ const Dashboard = () => {
              <table width='100%'>
                 <thead>
                   <tr>
-                    <td>Project Title</td>
-                    <td>Department</td>
+                    <td>Name</td>
+                    <td>Username</td>
                     <td>Status</td>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                  <td>UI/UX Design</td>
-                  <td>UI Team</td>
+                  <td>Gidigbi Ayomide</td>
+                  <td>Draysongz</td>
                   <td><span className="status purple"></span>
-                    review
+                    verified
                   </td>
                   </tr>
 
                   <tr>
-                    <td>Web Development</td>
-                    <td>Frontend</td>
+                    <td>Great Adams</td>
+                    <td>Great</td>
                   <td><span className="status pink"></span>
                     in progress
                   </td>
                   </tr>
 
                   <tr>
-                    <td>Smart Change App</td>
-                    <td>Mobile Team</td>
+                    <td>Ademola Abidemi</td>
+                    <td>Abidemi</td>
                   <td><span className="status orange"></span>
                     pending
                   </td>
                   </tr>
 
                   <tr>
-                  <td>UI/UX Design</td>
-                  <td>UI Team</td>
+                  <td>Karla Obakpolor</td>
+                  <td>karlagod</td>
                   <td><span className="status purple"></span>
-                    review
+                    verified
                   </td>
                   </tr>
 
                   <tr>
-                    <td>Web Development</td>
-                    <td>Frontend</td>
+                    <td>Onyeka ekwemozor</td>
+                    <td>itzroyale</td>
                   <td><span className="status pink"></span>
                     in progress
                   </td>
                   </tr>
 
                   <tr>
-                    <td>Smart Change App</td>
-                    <td>Mobile Team</td>
+                    <td>Annabel Allison</td>
+                    <td>Annabel</td>
                   <td><span className="status orange"></span>
                     pending
                   </td>
                   </tr>
 
                   <tr>
-                  <td>UI/UX Design</td>
-                  <td>UI Team</td>
+                  <td>Augustina omahdigwe</td>
+                  <td>tinatruth</td>
                   <td><span className="status purple"></span>
                     review
                   </td>
                   </tr>
 
                   <tr>
-                    <td>Web Development</td>
-                    <td>Frontend</td>
+                    <td>Phillip Ebube</td>
+                    <td>PhilBubs</td>
                   <td><span className="status pink"></span>
                     in progress
                   </td>
                   </tr>
 
                   <tr>
-                    <td>Smart Change App</td>
-                    <td>Mobile Team</td>
+                    <td>Stephen Ogbaje</td>
+                    <td>sirSteve</td>
                   <td><span className="status orange"></span>
                     pending
                   </td>
@@ -236,60 +234,70 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="customers">
+
+      <div className="customers">
         <div className="card">
-            <div className="card-header">
-              <h3>New Users</h3>
+          <div className="card-header">
+            <h3>New Merchants</h3>
 
-              <button>See all <span className="las la-arrow-right"></span></button>
+            <button>see all <span className='las la-arrow-right'></span></button>
+          </div>
+
+          <div className="card-body">
+            <div className="customer">
+              <div className='info'>
+              <img src={avatar} width='40px' height='40px' alt="" />
+
+              <div>
+              <h4>Karla God</h4>
+              <small>CEO Cryptosmart</small>
+              </div>
+              </div> 
+              <div className='contact'>
+                <span className="las la-user-circle"></span>
+                <span className="las la-comment"></span>
+                <span className="las la-phone"></span>
+                
+              </div>
             </div>
 
-            <div className="card-body">
             <div className="customer">
-                <div className='info'>
-                <img src={avatar} alt="" width='40px' height='40px' />
+              <div className='info'>
+              <img src={avatar} width='40px' height='40px' alt="" />
+
               <div>
-                <h4>Great Adams </h4>
-                <small>CEO TechHouse</small>
-                </div>
+              <h4>Karla God</h4>
+              <small>CEO Cryptosmart</small>
+              </div>
+              </div> 
+              <div className='contact'>
+                <span className="las la-user-circle"></span>
+                <span className="las la-comment"></span>
+                <span className="las la-phone"></span>
+                
               </div>
             </div>
-            <div className='contact'>
-              <span className="las la-user-circle"></span>
-              <span className="las la-comment"></span>
-              <span className="las la-phone"></span>
-             </div>
-            </div>
+
             <div className="customer">
-                <div className='info'>
-                <img src={avatar} alt="" width='40px' height='40px' />
+              <div className='info'>
+              <img src={avatar} width='40px' height='40px' alt="" />
+
               <div>
-                <h4>Great Adams </h4>
-                <small>CEO TechHouse</small>
-                </div>
+              <h4>Karla God</h4>
+              <small>CEO Cryptosmart</small>
+              </div>
+              </div> 
+              <div className='contact'>
+                <span className="las la-user-circle"></span>
+                <span className="las la-comment"></span>
+                <span className="las la-phone"></span>
+                
               </div>
             </div>
-            <div className='contact'>
-              <span className="las la-user-circle"></span>
-              <span className="las la-comment"></span>
-              <span className="las la-phone"></span>
-             </div>
-             <div className="customer">
-                <div className='info'>
-                <img src={avatar} alt="" width='40px' height='40px' />
-              <div>
-                <h4>Great Adams </h4>
-                <small>CEO TechHouse</small>
-                </div>
-              </div>
-            </div>
-            <div className='contact'>
-              <span className="las la-user-circle"></span>
-              <span className="las la-comment"></span>
-              <span className="las la-phone"></span>
-             </div>
-            </div>
-            </div>     
+          </div>
+        </div>
+      </div>
+
     </div>
     </main>
 </div>
