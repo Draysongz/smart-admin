@@ -6,6 +6,8 @@ import {ToastContainer} from 'react-toastify'
 import { AuthContext } from './context/AuthContext';
 import Register from './Pages/Register';
 import Dashboard from './Pages/Dashboard';
+import Users from './Pages/Users';
+
 
 function App() {
 
@@ -25,6 +27,11 @@ function App() {
           <Route path='/dashboard' element={
           <RequireAuth>
           <Dashboard/>
+          </RequireAuth>
+          }/>
+          <Route path='/users' element={
+          <RequireAuth>
+          <Users/>
           </RequireAuth>
           }/>
         </Routes>

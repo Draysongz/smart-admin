@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import avatar from '../Assets/avatar.svg'
 import { addDoc, collection } from 'firebase/firestore'
-import { createUserWithEmailAndPassword,} from 'firebase/auth'
+import { createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
 import { auth, db } from '../firebase'
 import {toast} from 'react-toastify'
 
@@ -29,6 +29,9 @@ const Register = () => {
         try {
             const userCredential= await createUserWithEmailAndPassword(auth,email,password)
             const user = userCredential.user
+            updateProfile(user, {
+                displayName: username
+            })
             const colref= await addDoc(collection(db, 'users'),{
                 name: name,
                 displayName: username,

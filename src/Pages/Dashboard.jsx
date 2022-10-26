@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { auth } from '../firebase'
+import React, { useState, useEffect } from 'react'
+import { auth, colref } from '../firebase'
+import { onAuthStateChanged } from 'firebase/auth'
+import { onSnapshot } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import './Dashboard.css'
@@ -8,7 +10,25 @@ import avatar from '../Assets/avatar.svg'
 
 
 const Dashboard = () => {
-  
+  const [totalUser, setTotalUser]= useState(0)
+  const [useremail, setUserMail] = useState('')
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserMail(user.displayName)
+    }else(
+      console.log('no user')
+    )
+  });
+  onSnapshot(colref, (snapshot)=>{
+    let users= []
+    snapshot.docs.forEach((doc)=>{
+        users.push({...doc.data(), id: doc.id})
+        setTotalUser(users.length)
+})
+
+})
+  },[])
     const navigate = useNavigate()
     const logout = async (e)=>{
         e.preventDefault()
@@ -38,7 +58,7 @@ const Dashboard = () => {
             </a>
             </li>
             <li>
-            <a href="#">
+            <a href="/users">
               <span className='las la-user'></span>
               <span>Users</span>
             </a>
@@ -90,7 +110,7 @@ const Dashboard = () => {
     <div className="user-wrapper">
       <img src={avatar} alt="" width='30px' height='30px' />
       <div>
-        <h4>John Doe</h4>
+        <h4>{useremail}</h4>
         <small>Super admin</small>
       </div>
     </div>
@@ -100,7 +120,7 @@ const Dashboard = () => {
     <div className="cards">
       <div className="card-single">
         <div>
-          <h1>54</h1>
+          <h1>{totalUser}</h1>
           <span>Users</span>
         </div>
         <div>
