@@ -26,9 +26,10 @@ const Dashboard = () => {
         users.push({...doc.data(), id: doc.id})
         setTotalUser(users.length)
 })
-
+console.log(users)
 })
   },[])
+
     const navigate = useNavigate()
     const logout = async (e)=>{
         e.preventDefault()
@@ -83,7 +84,7 @@ const Dashboard = () => {
             </li>
             <li>
               <a href="#">
-              <span className="las la-power-off"></span>
+              <span onClick={logout} className="las la-power-off"></span>
               <span onClick={logout} className='logbtn'>Log out</span>
               </a>
             </li>

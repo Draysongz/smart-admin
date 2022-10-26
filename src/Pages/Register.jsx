@@ -30,7 +30,8 @@ const Register = () => {
             const userCredential= await createUserWithEmailAndPassword(auth,email,password)
             const user = userCredential.user
             updateProfile(user, {
-                displayName: username
+                displayName: username,
+                role:'admin'
             })
             const colref= await addDoc(collection(db, 'users'),{
                 name: name,

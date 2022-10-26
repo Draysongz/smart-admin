@@ -44,6 +44,8 @@ const Users = () => {
             console.log(error)
         }
     }
+    document.title='Users'
+
   return (
    <>
    <div className='table-container'>
