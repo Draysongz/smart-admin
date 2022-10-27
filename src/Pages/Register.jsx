@@ -3,9 +3,10 @@ import './Register.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import avatar from '../Assets/avatar.svg'
-import { addDoc, collection } from 'firebase/firestore'
+import { ref, set, get, push, child } from 'firebase/database'
 import { createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
 import { auth, db } from '../firebase'
+
 import {toast} from 'react-toastify'
 
 const Register = () => {
@@ -19,11 +20,11 @@ const Register = () => {
       function focus(){
         setIsFocused(true)
     }
-
+    
     const redirect = ()=>{
         navigate('/login')
     }
-
+    document.title= 'Smart-Admin-SignUp'
     const onSubmit= async(e)=>{
         e.preventDefault()
         try {
@@ -31,14 +32,14 @@ const Register = () => {
             const user = userCredential.user
             updateProfile(user, {
                 displayName: username,
-                role:'admin'
             })
-            const colref= await addDoc(collection(db, 'users'),{
+            const userId = push(child(ref(db), 'admins/')).key
+            set(ref(db, 'admins/' + userId ), {
                 name: name,
                 displayName: username,
                 email: email,
-
-            })
+                profile_picture : `imageUrl`
+              });
             toast('successful')
             navigate('/login')
         } catch (error) {

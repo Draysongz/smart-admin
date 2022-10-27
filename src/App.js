@@ -9,14 +9,16 @@ import Dashboard from './Pages/Dashboard';
 import Users from './Pages/Users';
 
 
+
 function App() {
 
- 
+ console.log(process.env.REACT_APP_FIRE_API_KEY)
+ console.log(process.env)
   const {currentUser}= useContext(AuthContext)
 
   const RequireAuth = ({children})=>{
     return currentUser ? (children ): <Navigate to ='/login'/>}
-
+console.log(process.env.FIRE_API_KEY)
     console.log(currentUser)
   return (
     <div className="App">

@@ -1,13 +1,13 @@
 import React from 'react'
 import Table  from 'react-bootstrap/Table'
 import { useState, useEffect } from 'react'
-import {colref} from '../firebase.js'
-import { onSnapshot } from 'firebase/firestore'
 import './Users.css'
 import avatar from '../Assets/avatar.svg'
 import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
+import { child, ref } from 'firebase/database'
 import { signOut } from 'firebase/auth'
+import { onValue } from 'firebase/database'
 import { sendEmailVerification } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 
@@ -15,16 +15,27 @@ import { useNavigate } from 'react-router-dom'
 const Users = () => {
     const [userArray, setUserArray]= useState([])
     const [useremail, setUserMail] = useState('')
+    const [ismerchant, setIsMerchant]= useState(false)
 
     useEffect(()=>{
-        onSnapshot(colref, (snapshot)=>{
-            let users= []
-            snapshot.docs.forEach((doc)=>{
-                users.push({...doc.data(), id: doc.id})
-                setUserArray(users)
+     
+      const userRef= ref(db, 'users')
+      onValue(userRef, (snapshot) => {
+        let records = []
+        snapshot.forEach(childSnapshot=>{
+          let keyName = childSnapshot.key
+          let data = childSnapshot.val()
+          records.push({"key": keyName, "data":data})
         })
-        
+        setUserArray(records)
+        userArray.map((user, index)=>{
+          if(user.data.merchant!= true){
+            setIsMerchant('User')
+          }
         })
+      })
+
+
         onAuthStateChanged(auth, (user) => {
             if (user) {
               setUserMail(user.email)
@@ -57,13 +68,13 @@ const Users = () => {
       <div className="sidebar-menu">
         <ul>
           <li>
-            <a href="#" className='active'>
+            <a href="/dashboard" >
               <span className='las la-igloo'></span>
               <span>Dashboard</span>
             </a>
             </li>
             <li>
-            <a href="#">
+            <a href="#" className='active'>
               <span className='las la-user'></span>
               <span>Users</span>
             </a>
@@ -125,9 +136,9 @@ const Users = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Username</th>
             <th>Email Address</th>
             <th>Phone Number</th>
+            <th>Role</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -135,12 +146,12 @@ const Users = () => {
             {userArray.map((user, index)=>{
                 return(
                     <tr key={index}>
-                        <td>{user.name}</td>
-                        <td>{user.displayName}</td>
-                        <td>{user.email}</td>
+                        <td>{user.data.username}</td>
+                        <td>{user.data.email}</td>
                         <td>
-                           
+                        {user.data.phone}
                         </td>
+                        <td>{ismerchant}</td>
                         <td>
                             <span><button>Edit</button></span>
                             <span><button>Delete</button></span>

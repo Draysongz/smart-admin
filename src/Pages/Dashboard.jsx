@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { auth, colref } from '../firebase'
+import { auth,  } from '../firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { onSnapshot } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
@@ -11,23 +11,24 @@ import avatar from '../Assets/avatar.svg'
 
 const Dashboard = () => {
   const [totalUser, setTotalUser]= useState(0)
-  const [useremail, setUserMail] = useState('')
+  const [username, setUserName] = useState('')
   useEffect(()=>{
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUserMail(user.displayName)
+        console.log(user)
+        setUserName(user.displayName)
     }else(
       console.log('no user')
     )
   });
-  onSnapshot(colref, (snapshot)=>{
-    let users= []
-    snapshot.docs.forEach((doc)=>{
-        users.push({...doc.data(), id: doc.id})
-        setTotalUser(users.length)
-})
-console.log(users)
-})
+//   onSnapshot(colref, (snapshot)=>{
+//     let users= []
+//     snapshot.docs.forEach((doc)=>{
+//         users.push({...doc.data(), id: doc.id})
+//         setTotalUser(users.length)
+// })
+// console.log(users)
+// })
   },[])
 
     const navigate = useNavigate()
@@ -53,7 +54,7 @@ console.log(users)
       <div className="sidebar-menu">
         <ul>
           <li>
-            <a href="#" className='active'>
+            <a href="/dashboard" className='active'>
               <span className='las la-igloo'></span>
               <span>Dashboard</span>
             </a>
@@ -111,7 +112,7 @@ console.log(users)
     <div className="user-wrapper">
       <img src={avatar} alt="" width='30px' height='30px' />
       <div>
-        <h4>{useremail}</h4>
+        <h4>{username}</h4>
         <small>Super admin</small>
       </div>
     </div>
