@@ -144,20 +144,21 @@ const Users = () => {
         </thead>
         <tbody>
             {userArray.map((user, index)=>{
+              if(user.data.merchant != true){
                 return(
-                    <tr key={index}>
-                        <td>{user.data.username}</td>
-                        <td>{user.data.email}</td>
-                        <td>
-                        {user.data.phone}
-                        </td>
-                        <td>{ismerchant}</td>
-                        <td>
-                            <span><button>Edit</button></span>
-                            <span><button>Delete</button></span>
-                        </td>
-                    </tr>
-                )
+                  <tr key={index}>
+                         <td>{user.data.username}</td>
+                      <td>{user.data.email}</td>
+                      <td>
+                      {user.data.phone}
+                      </td>
+                      <td>{ismerchant}</td>
+                      <td>
+                          <span className='tst'><button className='edit-btn'>Edit</button></span>
+                          <span><button id='delbtn'>Delete</button></span>
+                      </td>
+                  </tr>
+                )}
             })}
         </tbody>
         </Table>

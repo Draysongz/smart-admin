@@ -1,9 +1,8 @@
 import {initializeApp} from 'firebase/app'
 import { getDatabase } from "firebase/database";
 import {getAuth} from 'firebase/auth'
-import { get } from 'firebase/database';
+
 import { ref } from 'firebase/database';
-import { doc } from 'firebase/firestore';
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 

@@ -70,3 +70,22 @@ table {
     
     margin-left: .5rem;
 }
+td span .edit-btn{
+  width:6vw;
+  height: 6vh;
+  color: black;
+  cursor: pointer;
+  border-radius:5px;
+  padding: .5rem;
+  border: 2px solid #f9a826;
+}
+td span #delbtn{
+  width:6vw;
+  height: 6vh;
+  color: black;
+  cursor: pointer;
+  border-radius:5px;
+  padding: .5rem;
+  border: 2px solid #f9a826;
+  margin-left: 1rem;
+}
